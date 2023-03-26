@@ -19,7 +19,6 @@ import { setDoc, doc } from "firebase/firestore";
 import { auth, db } from "./firebase-config/firebase";
 import { arrayUnion, onSnapshot } from "firebase/firestore";
 import Transactions from "./Transactions";
-import { SingleBedOutlined } from "@mui/icons-material";
 import { signOut } from "firebase/auth";
 
 

@@ -1,0 +1,37 @@
+html{
+    height: 100vh;
+}
+
+.btn1{
+    border: #1976d2 solid 2px;
+    border-radius: 16px;
+    background: rgb(224, 220, 220);
+    font-size: 25px;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    transition: 1s;
+
+}
+
+.btn1:hover{
+    transition: 1s;
+    background: #1976d2;
+    color: white;
+}
+
+body{
+    height: 100vh;
+}
+.center{
+    text-align: center;
+}
+
+.logo{
+    font-size: 6em;
+    margin-bottom: 1em;
+}
+.height{
+    height: 100vh;
+    background: rgb(224, 220, 220);
+
+}

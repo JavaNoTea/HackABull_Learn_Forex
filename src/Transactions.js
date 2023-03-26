@@ -1,9 +1,5 @@
 import * as React from "react";
 import Link from "@mui/material/Link";
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,6 +10,11 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { useState } from "react";
+import { auth, db } from "./firebase-config/firebase";
+import { setDoc, doc } from "firebase/firestore";
+import { useContext } from "react";
+import { arrayUnion } from "firebase/firestore";
+import { AuthContext } from "./context/AuthContext";
 
 
 function preventDefault(event) {
@@ -25,12 +26,12 @@ export default function Transactions() {
   let cur1 = "";
   let cur2 = "";
 
-
+let newArray;
   function drawOutput(responseText) {
    // let resp = JSON.parse(responseText).forexList;
-    console.log("works")
-    console.log(responseText);
-    //let newArray = eval(responseText);
+    // console.log("works")
+    // console.log(responseText);
+    newArray = eval(responseText);
   }
   
   
@@ -71,31 +72,58 @@ export default function Transactions() {
     
     cur1 = document.getElementById("from").innerHTML;
     cur2 = document.getElementById("to").innerHTML;
-
+    const link = "https://financialmodelingprep.com/api/v3/quote/"+ cur1 + cur2 + "?apikey=98c230cb5831a3d2a2c9aa22bdd7b62c"
+    //console.log(link)
+    getRequest(
+      link,
+      drawOutput
+    );
+      console.log(cur1+cur2)
+      try{
+    setMult(newArray[0].price)
+      }
+      catch(e){
+        console.log(e)
+      }
   }
 
   const [mult, setMult] = useState(0);
 
+  const {currentUser} = useContext(AuthContext)
+  const contactDB = async(cur2) =>{
+    try{
+      await setDoc(doc(db, "currency", currentUser.uid), {
+          Carray: arrayUnion({
+              type:cur2,
+              amount:newArray[0].price,
+          })}
+      )
+  }
+  catch(e){
+      console.log(e);
+  }
+  }
+
 
   const handleClick= () => {
-    setMult(parseInt(document.getElementById("multiplier").innerHTML));
+    let temp = document.getElementById("multiplier").innerHTML;
+    temp = temp.substring(2,temp.length);
     cur1 = document.getElementById("from").innerHTML;
     cur2 = document.getElementById("to").innerHTML;
 
-
-    let temp = ""
 
 
 
 
 
     const link = "https://financialmodelingprep.com/api/v3/quote/"+ cur1 + cur2 + "?apikey=98c230cb5831a3d2a2c9aa22bdd7b62c"
-    console.log(link)
+    //console.log(link)
     getRequest(
       link,
       drawOutput
     );
-    console.log(mult)
+
+    contactDB(cur2);
   }
 
   return (

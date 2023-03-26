@@ -3,12 +3,14 @@ html{
 }
 
 .btn1{
-    border: #1976d2 solid 2px;
+    border: #1976d2 solid 1px;
     border-radius: 16px;
-    background: rgb(224, 220, 220);
+    background: rgb(0, 0, 0);
     font-size: 25px;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: .3em;
+    color: white;
     transition: 1s;
 
 }
@@ -16,11 +18,17 @@ html{
 .btn1:hover{
     transition: 1s;
     background: #1976d2;
-    color: white;
+    color: black;
+}
+
+.width{
+    width: 60em;
+    color: #1976d2;
 }
 
 body{
     height: 100vh;
+    
 }
 .center{
     text-align: center;
@@ -33,5 +41,10 @@ body{
 .height{
     height: 100vh;
     background: rgb(224, 220, 220);
+    background: rgb(0, 0, 0);
 
+}
+
+.hover:hover{
+    cursor: pointer;
 }

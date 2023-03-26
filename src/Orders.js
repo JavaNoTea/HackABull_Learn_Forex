@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
+import { Tooltip } from '@mui/material';
 
 // Generate Order Data
 function createData(id, date, currency, curPrice, enterPrice, leverage, amount) {
@@ -62,7 +63,7 @@ export default function Orders() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <Tooltip title="Date and time the exchange took place">
+          <Tooltip title="Date and time the exchange took place">
             <TableCell>Date</TableCell>
             </Tooltip>
             <Tooltip title="Currency exchange refers to the buying and selling of different types of money, such as US Dollars, Euros, or Japanese Yen. Forex traders use currency exchange to profit from changes in exchange rates, which determine how much one currency is worth relative to another.">
